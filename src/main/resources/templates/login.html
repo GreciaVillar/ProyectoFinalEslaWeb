@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Ensueño - Restaurante</title>
+	<!-- Favicon -->
+	<link th:href="@{/img/favicon.ico}" href="../static/img/favicon.ico" rel="icon">
+
+	<link rel="icon" href="/img/logo.png">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="Free Website Template" name="keywords">
+	<meta content="Free Website Template" name="description">
+	<link th:href="@{/css/login.css}" rel="stylesheet">
+	<link th:href="'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container" id="container">
+
+		<div class="form-container sign-up-container">
+			<form action="" method="post" id="registroForm">
+				<h1>Registrar</h1>
+				<input type="text" id="nombre" name="nombre" placeholder="Nombre" />
+				<input type="text" id="apellido" name="apellido" placeholder="Apellido" />
+				<input type="password" id="password" name="password" placeholder="Contraseña" />
+				<input type="email" id="email" name="email" placeholder="Correo electronico" />
+				<button type="button" onclick="registrar()">Registrar</button>
+			</form>
+		</div>
+
+		<div id="registroExitosoModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="cerrarModal()">&times;</span>
+				<p>¡Registro exitoso! Ahora puedes iniciar sesión.</p>
+			</div>
+		</div>
+
+		<div class="form-container sign-in-container">
+			<form id="loginForm" action="#" method="post">
+				<h1>Iniciar sesión</h1>
+				<input type="email" id="loginEmail" name="email" placeholder="Correo electronico" />
+				<input type="password" id="loginPassword" name="password" placeholder="Contraseña" />
+				<a th:href="@{/home/olvidar}" class="olvido-contrasena">¿Olvidó su contraseña?</a>
+				<button type="button" onclick="iniciarSesion()">Iniciar sesión</button>
+				<div id="mensajeError" class="mensaje-error"></div>
+			</form>
+		</div>
+
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>¡Bienvenid@ de nuevo!</h1>
+					<p>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
+					<button class="ghost" id="signIn" onclick="iniciarSesion()">Iniciar Sesión</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Hola!</h1>
+					<p>Introduce tus datos personales y comienza tu viaje con nosotros.</p>
+					<button class="ghost" id="signUp">Registrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<script>
+		function registrar() {
+			var nombre = $('#nombre').val();
+			var apellido = $('#apellido').val();
+			var email = $('#email').val();
+			var password = $('#password').val();
+
+			$.ajax({
+				type: 'POST',
+				url: 'https://carmensandoval.pythonanywhere.com/usuarios/',
+				data: {
+					nombre: nombre,
+					apellido: apellido,
+					email: email,
+					password: password
+				},
+				success: function (response) {
+					$('#registroExitosoModal').css('display', 'block');
+					$('#nombre').val('');
+					$('#apellido').val('');
+					$('#email').val('');
+					$('#password').val('');
+				},
+				error: function (error) {
+					console.error('Error en el registro:', error);
+				}
+			});
+		}
+
+		function cerrarModal() {
+			$('#registroExitosoModal').css('display', 'none');
+		}
+
+		function iniciarSesion() {
+			var email = $('#loginEmail').val();
+			var password = $('#loginPassword').val();
+
+			$.ajax({
+				type: 'POST',
+				url: 'https://carmensandoval.pythonanywhere.com/login/',
+				data: {
+					email: email,
+					password: password
+				},
+				success: function (response) {
+					console.log('Respuesta de inicio de sesión:', response);
+
+					if (response.id_usuario && response.nombre) {
+						localStorage.setItem('usuarioNombre', response.nombre);
+						localStorage.setItem('usuarioId', response.id_usuario);
+						window.location.href = '/ensueno/inicio/';
+					} else {
+						mostrarMensajeError('Credenciales incorrectas. Por favor, verifica tus datos.');
+					}
+				},
+				error: function (xhr, textStatus, errorThrown) {
+					console.error('Error en el inicio de sesión:', xhr.responseText);
+
+					try {
+						var errorResponse = JSON.parse(xhr.responseText);
+						if (errorResponse && errorResponse.error) {
+							mostrarMensajeError(errorResponse.error);
+						} else {
+							mostrarMensajeError('Hubo un error al procesar la solicitud.');
+						}
+					} catch (e) {
+						mostrarMensajeError('Hubo un error al procesar la solicitud.');
+					}
+				}
+			});
+		}
+
+		function mostrarMensajeError(mensaje) {
+			var mensajeErrorElemento = $('#mensajeError');
+
+			if (mensajeErrorElemento.length > 0) {
+				mensajeErrorElemento.text(mensaje);
+			} else {
+				alert(mensaje);
+			}
+		}
+
+
+		function mostrarNombreUsuario(nombreUsuario) {
+			var nombreUsuarioElemento = $('#nombreUsuario');
+
+			if (nombreUsuarioElemento.length > 0) {
+				nombreUsuarioElemento.text('Hola, ' + nombreUsuario);
+				console.log('Nombre del usuario obtenido:', nombreUsuario);
+			} else {
+				alert('Nombre del usuario obtenido: ' + nombreUsuario);
+				console.log('Nombre del usuario obtenido:', nombreUsuario);
+			}
+			console.log('Función mostrarNombreUsuario ejecutada.');
+		}
+	</script>
+	<script th:src="@{/js/login.js}"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			var usuarioId = localStorage.getItem('usuarioId');
+
+			console.log('ID de usuario en la página de inicio:', usuarioId);
+		});
+	</script>
+</body>
+
+</html>

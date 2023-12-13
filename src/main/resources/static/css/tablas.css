@@ -1,0 +1,45 @@
+ #tablaReservas {
+ 	width: 100%;
+ 	border-collapse: collapse;
+ 	margin-top: 20px;
+ 	font-size: 16px;
+ }
+
+ #tablaReservas th,
+ #tablaReservas td {
+ 	border: 1px solid #ddd;
+ 	padding: 12px;
+ 	text-align: left;
+ }
+
+ #tablaReservas th {
+ 	background-color: #f2f2f2;
+ }
+
+ .estado-pendiente {
+ 	color: #ffcc00;
+ }
+
+ .estado-aceptada {
+ 	color: #28a745;
+ }
+
+ .estado-cancelada {
+ 	color: #dc3545
+ }
+ #tablaTestimonios {
+ 	width: 100%;
+ 	border-collapse: collapse;
+ 	margin-top: 20px;
+ 	font-size: 16px;
+ }
+
+ #cuerpoTest th,
+ #tablaTestimonios td {
+ 	border: 1px solid #ddd;
+ 	padding: 12px;
+ 	text-align: left;
+ }
+ #cuerpoTest th {
+ 	background-color: #f2f2f2;
+ }

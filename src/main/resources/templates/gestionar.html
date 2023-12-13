@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Ensueño - Restaurante</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="Free Website Template" name="keywords">
+	<meta content="Free Website Template" name="description">
+
+	<!-- Favicon -->
+	<link th:href="@{/img/favicon.ico}" href="../static/img/favicon.ico" rel="icon">
+	<link rel="icon" href="/img/logo.png">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link th:href="@{/css/diarios.css}" rel="stylesheet">
+	<link
+		th:href="'https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap'"
+		rel="stylesheet">
+
+	<!-- Font Awesome -->
+	<link th:href="'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'" rel="stylesheet">
+
+	<!-- Libraries Stylesheet -->
+	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}"
+		href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+		href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+	<!-- Customized Bootstrap Stylesheet -->
+	<link th:href="@{/css/style.min.css}" rel="stylesheet">
+	<link th:href="@{/css/tablas.css}" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- Navbar Start -->
+	<div class="container-fluid p-0 nav-bar">
+		<nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+			<a th:href="@{/ensueno/inicio}" class="navbar-brand px-lg-4 m-0">
+				<img src="/img/logo.png" alt="Logo de Ensueño" style="max-height: 90px;">
+			</a>
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+				<div class="navbar-nav ml-auto p-4">
+					<a th:href="@{/ensueno/gestionar}" class="nav-item nav-link" style="font-size: smaller;">Mis
+						Reservas</a>
+					<a th:href="@{/ensueno/mis_testimonios}" class="nav-item nav-link" style="font-size: smaller;">Mis
+						Testimonios</a>
+					<a th:href="@{/ensueno/pescados}" class="nav-item nav-link" style="font-size: smaller;">Carta</a>
+					<a th:href="@{/home/principal}" class="nav-item nav-link" style="font-size: smaller;">Cerrar
+						Sesión</a>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<!-- Navbar End -->
+	<!-- Page Header Start -->
+	<div class="container-fluid page-header-nos mb-5 position-relative overlay-bottom">
+		<div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
+			style="min-height: 400px">
+			<h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase" style="font-size: 2.5em;">Historial de
+				Reservas</h1>
+			<div class="d-inline-flex mb-lg-5">
+				<p class="m-0 text-white"><a class="text-white" th:href="@{/ensueno/inicio}">Inicio</a></p>
+				<p class="m-0 text-white px-2">/</p>
+				<p class="m-0 text-white">Mis Reservas</p>
+			</div>
+		</div>
+	</div>
+	<!-- Page Header End -->
+	<!-- Reservation List Section -->
+	<div class="container-fluid my-5">
+		<div class="container">
+			<div class="reservation-list">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="mb-4">
+							<a th:href="@{/ensueno/reservar}" class="btn btn-lg custom-btn">¡Reservar Ahora!</a>
+						</div>
+						<div class="container-fluid mt-4">
+							<div class="alert alert-info" role="alert"
+								style="background-color: #ffcc80; color: #5a3a14; border-color: #ffcc80;">
+								¿Necesitas cancelar tu reserva? ¡Llámanos al <strong>+51 786 234 245</strong> y con
+								gusto te ayudaremos!
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="searchInput" placeholder="Buscar">
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<table class="table" id="tablaReservas">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Nombre</th>
+											<th scope="col">Ambiente</th>
+											<th scope="col">Cant. Comensales</th>
+											<th scope="col">Evento</th>
+											<th scope="col">Fecha y Hora</th>
+											<th scope="col">Estado</th>
+											<th scope="col">Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer Start -->
+	<div class="container-fluid footer text-white mt-4 pt-2 pb-2 px-0 position-relative overlay-top">
+		<div class="row mx-0 pt-2 px-sm-3 px-lg-5 mt-1">
+			<div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+				<div class="col-lg-3 col-md-6 mb-5">
+					<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Contacto</h4>
+					<p><i class="fa fa-map-marker-alt mr-2"></i>Calle Buenos aires, Tembladera, Cajamarca-Perú</p>
+					<p><i class="fa fa-phone-alt mr-2"></i>+51 786 234 245</p>
+					<p class="m-0"><i class="fa fa-envelope mr-2"></i>ensueno@gmail.com</p>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-5">
+					<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Redes sociales</h4>
+					<div class="d-flex justify-content-start">
+						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2"
+							href="https://www.whatsapp.com/?lang=es_LA" target="_blank"><i
+								class="fab fa-whatsapp"></i></a>
+						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2"
+							href="https://www.facebook.com/?locale=es_LA" target="_blank"><i
+								class="fab fa-facebook-f"></i></a>
+						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.instagram.com/"
+							target="_blank"><i class="fab fa-instagram"></i></a>
+						<a class="btn btn-lg btn-outline-light btn-lg-square" href="https://www.tiktok.com/es/"
+							target="_blank"><i class="fab fa-tiktok"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-5">
+					<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horarios de atención</h4>
+					<div>
+						<h6 class="text-white text-uppercase">Lunes - Viernes</h6>
+						<p>10:00 AM - 6:00 PM</p>
+						<h6 class="text-white text-uppercase">Sabados - Domingos</h6>
+						<p>9:00 AM - 4:00 PM</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-5">
+					<img class="logo-img" src="/img/logo.png" alt="Logo de Ensueño">
+				</div>
+			</div>
+			<div class="container-fluid text-center text-white border-top mt-1 py-1 px-sm-3 px-md-5"
+				style="border-color: rgba(256, 256, 256, .1) !important;">
+				<p class="mb-1 text-white">Copyright &copy; <a class="font-weight-bold" href="#">Ensueño</a></p>
+				<p class="m-0 text-white">Designed by <a class="font-weight-bold" href="#">ESLA_MEGACODE</a></p>
+			</div>
+		</div>
+	</div>
+	<!-- Footer End -->
+	<!-- JavaScript Libraries -->
+	<script th:src="'https://code.jquery.com/jquery-3.4.1.min.js'"></script>
+	<script th:src="'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'"></script>
+	<script th:src="@{/lib/easing/easing.min.js}" src="../static/lib/easing/easing.min.js"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}" src="../static/lib/waypoints/waypoints.min.js"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"
+		src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment.min.js}" src="../static/lib/tempusdominus/js/moment.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
+		src="../static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
+		src="../static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<!-- Template Javascript -->
+	<script th:src="@{/js/main.js}" src="../static/js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<!--Moment.js-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			mostrarNombreUsuario(localStorage.getItem('usuarioNombre'), localStorage.getItem('usuarioId'));
+			obtenerReservasUsuario(localStorage.getItem('usuarioId'));
+
+			$('#searchInput').on('input', function () {
+				filtrarReservasPorAmbiente($(this).val().toLowerCase());
+			});
+		});
+	</script>
+	<script>
+		function filtrarReservasPorAmbiente(ambiente) {
+			$('#tablaReservas tbody tr').filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(ambiente) > -1);
+			});
+		}
+
+		function mostrarReservasEnInterfaz(reservas) {
+        var tablaReservas = $('#tablaReservas tbody');
+        console.log('Mostrando reservas en la interfaz:', reservas);
+        tablaReservas.empty();
+        reservas.forEach(function (reserva, index) {
+            obtenerNombreUsuario(reserva.usuario, function (nombreUsuario) {
+                obtenerNombreAmbiente(reserva.ambiente, function (nombreAmbiente) {
+                    obtenerNombreEvento(reserva.evento, function (nombreEvento) {
+                        var fechaEvento = reserva.fecha_evento ? moment(reserva.fecha_evento).format('DD-MM-YYYY HH:mm') : 'N/A';
+                        var estadoClass = '';
+                        if (reserva.estado === 'pendiente') {
+                            estadoClass = 'estado-pendiente';
+                        } else if (reserva.estado === 'aceptada') {
+                            estadoClass = 'estado-aceptada';
+                        } else if (reserva.estado === 'cancelada') {
+                            estadoClass = 'estado-cancelada';
+                        }
+                        var fila = `<tr>
+                            <th scope="row">${index + 1}</th>
+                            <td>${nombreUsuario}</td>
+                            <td>${nombreAmbiente}</td>
+                            <td>${reserva.num_personas}</td>
+                            <td>${nombreEvento}</td>
+                            <td>${fechaEvento}</td>
+                            <td class="${estadoClass}">${reserva.estado}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="editarReserva(${reserva.id_reserva})">Editar</button>
+                                <!-- Agrega más botones de acciones según sea necesario -->
+                            </td>
+                        </tr>`;
+                        tablaReservas.append(fila);
+                    });
+                });
+            });
+        });
+    }
+		function editarReserva(idReserva) {
+			if (idReserva) {
+				window.location.href = '/ensueno/editar?idReserva=' + idReserva;
+			} else {
+				console.error('ID de reserva no válido.');
+			}
+		}
+	</script>
+</body>
+
+</html>

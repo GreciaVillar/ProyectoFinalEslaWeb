@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Ensueño - Restaurante</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="Free Website Template" name="keywords">
+	<meta content="Free Website Template" name="description">
+
+	<!-- Favicon -->
+	<link th:href="@{/img/favicon.ico}" href="../static/img/favicon.ico" rel="icon">
+	<link rel="icon" href="/img/logo.png">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link th:href="@{/css/diarios.css}" rel="stylesheet">
+	<link
+		th:href="'https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap'"
+		rel="stylesheet">
+
+	<!-- Font Awesome -->
+	<link th:href="'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'" rel="stylesheet">
+
+	<!-- Libraries Stylesheet -->
+	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}"
+		href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+		href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+	<!-- Customized Bootstrap Stylesheet -->
+	<link th:href="@{/css/style.min.css}" href="../static/css/style.min.css" rel="stylesheet">
+	<link th:href="@{/css/testimonios.css}" href="../static/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container-fluid testimonios-container">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<h2 class="text-center">¡Comparte tu Experiencia!</h2>
+					<form id="testimonioForm" method="post" onsubmit="enviarTestimonio(); return false;">
+						<div class="form-group">
+							<label for="testimonio">Testimonio:</label>
+							<textarea class="form-control" id="testimonio" name="testimonio" rows="4"
+								required></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary btn-block" style="color: white;">Enviar
+							Testimonio</button>
+						<a th:href="@{/ensueno/inicio}" class="btn btn-secondary btn-block back-btn">Volver</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts y enlaces a bibliotecas JS -->
+	<script th:src="'https://code.jquery.com/jquery-3.4.1.min.js'"></script>
+	<script th:src="'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'"></script>
+	<!-- SweetAlert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<script>
+		function enviarTestimonio() {
+			var testimonio = $("#testimonio").val();
+			var usuarioId = localStorage.getItem("usuarioId");
+
+			var testimonioData = {
+				testimonio: testimonio,
+				usuario: usuarioId,
+				fecha_publicacion: new Date().toISOString()
+			};
+
+			$.ajax({
+				type: "POST",
+				url: "https://carmensandoval.pythonanywhere.com/testimonios/",
+				contentType: "application/json",
+				data: JSON.stringify(testimonioData),
+				success: function (response) {
+					Swal.fire({
+						title: 'Testimonio enviado con éxito',
+						text: '¡Gracias por compartir tu experiencia!',
+						icon: 'success',
+						confirmButtonText: 'OK',
+						timer: 5000
+					}).then((result) => {
+						if (result.isConfirmed) {
+							window.location.href = '/ensueno/mis_testimonios';
+						}
+					});
+				},
+				error: function (error) {
+					Swal.fire({
+						title: 'Error al enviar el testimonio',
+						text: 'Hubo un problema al procesar tu testimonio. Por favor, inténtalo de nuevo más tarde.',
+						icon: 'error',
+						confirmButtonText: 'OK'
+					});
+					console.error("Error al enviar el testimonio:", error);
+				}
+			});
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Ensueño - Restaurante</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="Free Website Template" name="keywords">
+	<meta content="Free Website Template" name="description">
+
+	<!-- Favicon -->
+	<link th:href="@{/img/favicon.ico}" href="../static/img/favicon.ico" rel="icon">
+	<link rel="icon" href="/img/logo.png">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link
+		th:href="'https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap'"
+		rel="stylesheet">
+
+	<!-- Font Awesome -->
+	<link th:href="'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'" rel="stylesheet">
+
+	<!-- Libraries Stylesheet -->
+	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}"
+		href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+		href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+	<!-- Customized Bootstrap Stylesheet -->
+	<link th:href="@{/css/style.min.css}" href="../static/css/style.min.css" rel="stylesheet">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/main.js}" src="../static/js/main.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+
+			var urlParams = new URLSearchParams(window.location.search);
+			var idReserva = urlParams.get('idReserva');
+			fetch('https://carmensandoval.pythonanywhere.com/ambientes/')
+				.then(response => response.json())
+				.then(data => {
+					var ambienteSelect = $('#ambienteSelect');
+					ambienteSelect.empty();
+					data.forEach(ambiente => {
+						if (ambiente.estado) {
+							ambienteSelect.append($('<option>', {
+								value: ambiente.id_ambiente,
+								text: ambiente.nom_ambiente
+							}));
+						}
+					});
+				})
+				.catch(error => {
+					console.error('Error al cargar opciones de ambiente:', error);
+				});
+
+			fetch('https://carmensandoval.pythonanywhere.com/eventos/')
+				.then(response => response.json())
+				.then(data => {
+					var eventoSelect = $('#eventoSelect');
+					eventoSelect.empty();
+					data.forEach(evento => {
+						eventoSelect.append($('<option>', {
+							value: evento.id_evento,
+							text: evento.nombre
+						}));
+					});
+				})
+				.catch(error => {
+					console.error('Error al cargar opciones de evento:', error);
+				});
+			fetch('https://carmensandoval.pythonanywhere.com/reservas/' + idReserva)
+				.then(response => response.json())
+				.then(reservaEditar => {
+					$('#ambienteSelect').val(reservaEditar.ambiente);
+					$('#cantidad').val(reservaEditar.num_personas);
+					$('#eventoSelect').val(reservaEditar.evento);
+
+					var fechaEvento = new Date(reservaEditar.fecha_evento).toISOString().slice(0, 16);
+					$('#fechaHora').val(fechaEvento);
+				})
+				.catch(error => {
+					console.error('Error al obtener la reserva:', error);
+				});
+		});
+		function obtenerUsuarioId() {
+			return localStorage.getItem("usuarioId");
+		}
+
+		function enviarReserva() {
+			var idReserva = new URLSearchParams(window.location.search).get('idReserva');
+			var ambiente = $('#ambienteSelect').val();
+			var cantidad = $('#cantidad').val();
+			var evento = $('#eventoSelect').val();
+			var fechaHora = $('#fechaHora').val();
+
+			console.log('Datos a enviar:', {
+				num_personas: cantidad,
+				fecha_evento: fechaHora,
+				nom_cliente: obtenerUsuarioId(),
+				ambiente: ambiente,
+				evento: evento
+			});
+
+			fetch('https://carmensandoval.pythonanywhere.com/reservas/' + idReserva + '/', {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					num_personas: cantidad,
+					fecha_evento: fechaHora,
+					nom_cliente: obtenerUsuarioId(),
+					ambiente: ambiente,
+					evento: evento
+				}),
+			})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Error en la solicitud.');
+					}
+					return response.json();
+				})
+				.then(data => {
+					console.log('Respuesta exitosa del servidor:', data);
+					mostrarMensajeReservaExitosa();
+				})
+				.catch(error => {
+					console.error('Error en la solicitud:', error);
+					mostrarMensajeReservaNoExitosa(error);
+				});
+		}
+
+		function mostrarMensajeReservaExitosa() {
+			Swal.fire({
+				title: '¡Cambios Exitosos!',
+				text: 'Gracias por elegir Ensueño - Restaurante. Nos vemos pronto.',
+				icon: 'success',
+				confirmButtonText: 'OK',
+				timer: 15000
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.href = '/ensueno/gestionar';
+				}
+			});
+		}
+
+		function mostrarMensajeReservaNoExitosa(error) {
+			if (typeof Swal !== 'undefined') {
+				Swal.fire({
+					title: '¡Error en al realizar el cambio de reserva!',
+					text: 'Hubo un problema al procesar tu reserva. Por favor, inténtalo de nuevo más tarde.',
+					icon: 'error',
+					confirmButtonText: 'OK'
+				});
+			} else {
+				alert('Hubo un problema al procesar tu reserva. Por favor, inténtalo de nuevo más tarde.');
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<!-- Reservation Start -->
+	<div class="container-fluid my-5">
+		<div class="container">
+			<div class="reservation position-relative overlay-top overlay-bottom"
+				style="background-image: url('/img/reserva_1.jpg');">
+				<div class="row align-items-center">
+					<div class="col-lg-6">
+						<div class="text-center p-5" style="background: rgba(255, 255, 255, 0.9); border-radius: 10px;">
+							<div class="d-flex justify-content-between align-items-start mb-2">
+								<a th:href="@{/ensueno/gestionar}">
+									<i class="fa fa-arrow-circle-left fa-2x"></i>
+								</a>
+							</div>
+							<h1 class="text-dark mb-4 mt-2">Editar Reservas</h1>
+
+							<form th:action="@{/ensueno/editar}" method="post" id="reservaForm">
+								<input type="hidden" name="_method" value="put" />
+								<div class="form-group">
+									<input type="hidden" id="usuarioNombre" value="">
+								</div>
+
+								<div class="form-group">
+									<input type="hidden" id="usuarioId" value="">
+								</div>
+
+								<div class="form-group">
+									<select class="custom-select bg-light border-0 px-4" style="height: 49px;"
+										id="ambienteSelect" name="ambiente">
+										<option selected>Ambiente</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="number" class="form-control bg-light border-0 px-4" id="cantidad"
+										placeholder="Ingrese la cantidad de comensales" min="1" max="200"
+										required="required">
+								</div>
+								<div class="form-group">
+									<select class="custom-select bg-light border-0 px-4" style="height: 49px;"
+										id="eventoSelect" name="tipoEvento">
+										<option selected>Tipo de Evento</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="datetime-local" class="form-control bg-light border-0 p-4"
+										id="fechaHora" placeholder="Ingrese la fecha y la hora" required="required">
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary" style="color: white;"
+										onclick="enviarReserva();">Guardar Cambios</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Reservation End -->
+</body>
+
+</html>

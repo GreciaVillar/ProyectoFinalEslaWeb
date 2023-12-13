@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:href="@{/css/error.css}" rel="stylesheet">
+	<!-- Favicon -->
+	<link th:href="@{/img/favicon.ico}" href="../static/img/favicon.ico" rel="icon">
+	<link rel="icon" href="/img/logo.png">
+	<title>Error</title>
+</head>
+<body>
+	<div class="error-container">
+		<img class="centered-image" src="/img/camaron_error.jpg" alt="Camaron molesto_error">
+		<h1>¡Ups! Algo salió mal</h1>
+		<a class="redirect-link" th:href="@{/home/principal}">Volver</a>
+	</div>
+</body>
+</html>

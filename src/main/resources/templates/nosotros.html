@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title>Ensueño - Restaurante</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="Free Website Template" name="keywords">
+	<meta content="Free Website Template" name="description">
+
+	<!-- Favicon -->
+	<link th:href="@{/img/favicon.ico}" href="../static/img/favicon.ico" rel="icon">
+	<link rel="icon" href="/img/logo.png">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link th:href="@{/css/diarios.css}" rel="stylesheet">
+	<link
+		th:href="'https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap'"
+		rel="stylesheet">
+
+
+	<!-- Agrega el enlace a la biblioteca Owl Carousel -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+
+	<!-- Font Awesome -->
+	<link th:href="'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'" rel="stylesheet">
+
+	<!-- Libraries Stylesheet -->
+	<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}"
+		href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}"
+		href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+	<!-- Customized Bootstrap Stylesheet -->
+	<link th:href="@{/css/style.min.css}" href="../static/css/style.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- Navbar Start -->
+	<div class="container-fluid p-0 nav-bar">
+		<nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+			<a th:href="@{/home/principal}" class="navbar-brand px-lg-4 m-0">
+				<img src="/img/logo.png" alt="Logo de Ensueño" style="max-height: 90px;">
+			</a>
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+				<div class="navbar-nav ml-auto p-4">
+					<a th:href="@{/home/nosotros}" class="nav-item nav-link" style="font-size: smaller;">Nosotros</a>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+							style="font-size: smaller;">Galeria</a>
+						<div class="dropdown-menu text-capitalize">
+							<a th:href="@{/home/galeria_platos}" class="dropdown-item"
+								style="font-size: smaller;">Platos</a>
+							<a th:href="@{/home/galeria_ambientes}" class="dropdown-item"
+								style="font-size: smaller;">Ambientes</a>
+						</div>
+					</div>
+					<a th:href="@{/home/carta_pescados}" class="nav-item nav-link" style="font-size: smaller;">Carta</a>
+					<a th:href="@{/home/menu}" class="nav-item nav-link" style="font-size: smaller;">Menu</a>
+					<a th:href="@{/home/reservas}" class="nav-item nav-link" style="font-size: smaller;">Reservas</a>
+					<a th:href="@{/home/login}" class="nav-item nav-link" style="font-size: smaller;">Inicia Sesión o
+						Regístrate</a>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<!-- Navbar End -->
+	<!-- Page Header Start -->
+	<div class="container-fluid page-header-nos mb-5 position-relative overlay-bottom">
+		<div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
+			style="min-height: 400px">
+			<h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase" style="font-size: 2.5em;">Más sobre
+				nosotros</h1>
+			<div class="d-inline-flex mb-lg-5">
+				<p class="m-0 text-white"><a class="text-white" th:href="@{/home/principal}">Inicio</a></p>
+				<p class="m-0 text-white px-2">/</p>
+				<p class="m-0 text-white">Nosotros</p>
+			</div>
+		</div>
+	</div>
+	<!-- Page Header End -->
+	<!-- Service Start -->
+	<div class="container-fluid pt-5">
+		<div class="container">
+			<div class="section-title" style="margin-top: -150px">
+				<h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Nosotros</h4>
+			</div>
+			<div class="row">
+				<div class="row align-items-center">
+					<div class="col-sm-5">
+						<img class="img-fluid" src="/img/nosotros.jpg" alt="">
+					</div>
+					<div class="col-sm-7">
+						<h4><i class="fa fa-utensils service-icon"></i>Restaurante Ensueño</h4>
+						<p class="m-0">En Ensueño Restaurant, nos enorgullece ser especialistas en la preparación de
+							deliciosos platos a base de especies de la laguna. Nos dedicamos apasionadamente a resaltar
+							los sabores únicos y frescos que este entorno nos ofrece. Nuestros talentosos chefs crean
+							platos excepcionales que celebran la riqueza de la fauna acuática local, asegurando que cada
+							bocado sea una experiencia culinaria inigualable.
+							Ubicados en un entorno pintoresco con impresionantes vistas a la laguna, invitamos a
+							nuestros estimados clientes a disfrutar de estos tesoros naturales en un ambiente tranquilo
+							y acogedor. En Ensueño Restaurant, nos esforzamos por llevar a su mesa los sabores
+							auténticos de la laguna, creando recuerdos gastronómicos inolvidables en cada visita. Únase
+							a nosotros para explorar la magia de los ingredientes locales y
+							degustar el auténtico sabor de la laguna en cada plato que servimos.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Service End -->
+	<!-- Contact Start -->
+	<div class="container-fluid pt-5">
+		<div class="container">
+			<div class="section-title" style="margin-top: -95px">
+				<h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Contactanos Ahora</h4>
+			</div>
+			<div class="row px-3 pb-2">
+				<div class="col-sm-4 text-center mb-3">
+					<i class="fa fa-2x fa-map-marker-alt mb-3 text-primary"></i>
+					<h4 class="font-weight-bold">Dirección</h4>
+					<p>Calle Buenos aires, Tembladera, Cajamarca-Perú</p>
+				</div>
+				<div class="col-sm-4 text-center mb-3">
+					<i class="fa fa-2x fa-phone-alt mb-3 text-primary"></i>
+					<h4 class="font-weight-bold">Teléfono</h4>
+					<p>+51 786 234 245</p>
+				</div>
+				<div class="col-sm-4 text-center mb-3">
+					<i class="far fa-2x fa-envelope mb-3 text-primary"></i>
+					<h4 class="font-weight-bold">Email</h4>
+					<p>ensueno@gmail.com</p>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 pb-5" style="text-align: center;">
+					<div
+						style="width: 100%; max-width: 600px; height: 400px; position: relative; overflow: hidden; margin: 0 auto;">
+						<iframe style="border:0; width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.916477268075!2d-79.1370143258708!3d-7.250346471220264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91b2c6e9ad38d4ab%3A0xa7b9952beac4b26!2sLaguna%20de%20Ensue%C3%B1o!5e0!3m2!1ses!2spe!4v1698408962408!5m2!1ses!2spe"
+							allowfullscreen="" aria-hidden="false" tabindex="0">
+						</iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Contact End -->
+	<!-- Footer Start -->
+	<div class="container-fluid footer text-white mt-4 pt-2 pb-2 px-0 position-relative overlay-top">
+		<div class="row mx-0 pt-2 px-sm-3 px-lg-5 mt-1">
+			<div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+				<div class="col-lg-3 col-md-6 mb-5">
+					<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Contacto</h4>
+					<p><i class="fa fa-map-marker-alt mr-2"></i>Calle Buenos aires, Tembladera, Cajamarca-Perú</p>
+					<p><i class="fa fa-phone-alt mr-2"></i>+51 786 234 245</p>
+					<p class="m-0"><i class="fa fa-envelope mr-2"></i>ensueno@gmail.com</p>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-5">
+					<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Redes sociales</h4>
+					<div class="d-flex justify-content-start">
+						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2"
+							href="https://www.whatsapp.com/?lang=es_LA" target="_blank"><i
+								class="fab fa-whatsapp"></i></a>
+						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2"
+							href="https://www.facebook.com/?locale=es_LA" target="_blank"><i
+								class="fab fa-facebook-f"></i></a>
+						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.instagram.com/"
+							target="_blank"><i class="fab fa-instagram"></i></a>
+						<a class="btn btn-lg btn-outline-light btn-lg-square" href="https://www.tiktok.com/es/"
+							target="_blank"><i class="fab fa-tiktok"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-5">
+					<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horarios de atención</h4>
+					<div>
+						<h6 class="text-white text-uppercase">Lunes - Viernes</h6>
+						<p>10:00 AM - 6:00 PM</p>
+						<h6 class="text-white text-uppercase">Sabados - Domingos</h6>
+						<p>9:00 AM - 4:00 PM</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-5">
+					<img class="logo-img" src="/img/logo.png" alt="Logo de Ensueño">
+				</div>
+			</div>
+			<div class="container-fluid text-center text-white border-top mt-1 py-1 px-sm-3 px-md-5"
+				style="border-color: rgba(256, 256, 256, .1) !important;">
+				<p class="mb-1 text-white">Copyright &copy; <a class="font-weight-bold" href="#">Ensueño</a></p>
+				<p class="m-0 text-white">Designed by <a class="font-weight-bold" href="#">ESLA_MEGACODE</a></p>
+			</div>
+		</div>
+	</div>
+	<!-- Footer End -->
+	<!-- Back to Top -->
+	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
+		<i class="fa fa-angle-double-up" style="color: white;"></i>
+	</a>
+	<!-- JavaScript Libraries -->
+	<script th:src="'https://code.jquery.com/jquery-3.4.1.min.js'"></script>
+	<script th:src="'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'"></script>
+	<script th:src="@{/lib/easing/easing.min.js}" src="../static/lib/easing/easing.min.js"></script>
+	<script th:src="@{/lib/waypoints/waypoints.min.js}" src="../static/lib/waypoints/waypoints.min.js"></script>
+	<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"
+		src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment.min.js}" src="../static/lib/tempusdominus/js/moment.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"
+		src="../static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+	<script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"
+		src="../static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<!-- Template Javascript -->
+	<script th:src="@{/js/main.js}" src="../static/js/main.js"></script>
+</body>
+
+</html>
