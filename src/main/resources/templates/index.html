@@ -168,51 +168,42 @@
 		</div>
 	</div>
 	<!-- About End -->
-	<!-- Offer Start -->
+	
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<div class="section-title" style="margin-bottom:-60px; margin-top: -115px">
 		<h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Carta</h4>
 	</div>
 	<div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom"
 		style="background-size: cover; background-position: center;">
 		<div class="container py-5">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="card">
-						<img src="/img/cat_pescados.jpg" class="card-img-top" alt="Imagen de Pescados y Mariscos">
-						<div class="card-body">
-							<h1 class="display-4 text-primary mt-3">Pescados y Mariscos</h1>
-							<br>
-							<a th:href="@{/home/carta_pescados}" class="btn btn-primary" style="color: white;">Descubre
-								más</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card">
-						<img src="/img/cat_criollo.png" class="card-img-top" alt="Imagen de Pescados y Mariscos">
-						<div class="card-body">
-							<h1 class="display-4 text-primary mt-3">Criollos</h1>
-							<br>
-							<a th:href="@{/home/carta_criollos}" class="btn btn-primary" style="color: white;">Descubre
-								más</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card">
-						<img src="/img/cat_bebidas.jpg" class="card-img-top" alt="Imagen de Pescados y Mariscos">
-						<div class="card-body">
-							<h1 class="display-4 text-primary mt-3">Bebidas</h1>
-							<br>
-							<a th:href="@{/home/carta_bebidas}" class="btn btn-primary" style="color: white;">Descubre
-								más</a>
-						</div>
-					</div>
-				</div>
+			<div class="row" id="categoria-container">
 			</div>
 		</div>
 	</div>
-	<!-- Offer End -->
+	<script>
+		$(document).ready(function () {
+			$.get("https://carmensandoval.pythonanywhere.com/categorias", function (categorias) {
+				categorias.forEach(function (categoria) {
+					var nombreCategoria = categoria.nombre.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+					var categoriaHtml = `
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="${categoria.img}" class="card-img-top" alt="Imagen de ${categoria.nombre}" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h1 class="display-4 text-primary mt-3">${categoria.nombre}</h1>
+                                <br>
+                                <a href="/home/carta_${nombreCategoria.split('_')[0]}" class="btn btn-primary" style="color: white;">Descubre más</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+					$("#categoria-container").append(categoriaHtml);
+				});
+			});
+		});
+	</script>
+	
 	<!-- Menus Diarios Start -->
 	<div class="container-fluid pt-4">
 		<div class="container text-center">

@@ -94,7 +94,6 @@
 	<div class="container-fluid pt-5">
 		<div class="container">
 			<div class="row">
-
 				<script>
 					document.addEventListener('DOMContentLoaded', function () {
 						function obtenerDatosDeLaAPI() {
@@ -109,9 +108,7 @@
 						}
 						function mostrarDatosEnPagina(datos) {
 							const contenedor = document.querySelector('.row');
-
 							contenedor.innerHTML = '';
-
 							datos.forEach(item => {
 								const elemento = document.createElement('div');
 								elemento.classList.add('col-lg-6');
@@ -130,7 +127,6 @@
 								contenedor.appendChild(elemento);
 							});
 						}
-
 						obtenerDatosDeLaAPI();
 					});
 				</script>
