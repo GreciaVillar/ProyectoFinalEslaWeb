@@ -255,21 +255,21 @@
 				<div class="col-lg-3 col-md-6 mb-5">
 					<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Contacto</h4>
 					<p><i class="fa fa-map-marker-alt mr-2"></i>Calle Buenos aires, Tembladera, Cajamarca-Perú</p>
-					<p><i class="fa fa-phone-alt mr-2"></i>+51 786 234 245</p>
-					<p class="m-0"><i class="fa fa-envelope mr-2"></i>ensueno@gmail.com</p>
+					<p><i class="fa fa-phone-alt mr-2"></i>+51 942 772 888</p>
+					<p class="m-0"><i class="fa fa-envelope mr-2"></i>anyross@gmail.com</p>
 				</div>
 				<div class="col-lg-3 col-md-6 mb-5">
 					<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Redes sociales</h4>
 					<div class="d-flex justify-content-start">
 						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2"
-							href="https://www.whatsapp.com/?lang=es_LA" target="_blank"><i
+							href="https://wa.me/942772888" target="_blank"><i
 								class="fab fa-whatsapp"></i></a>
 						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2"
-							href="https://www.facebook.com/?locale=es_LA" target="_blank"><i
+							href="https://www.facebook.com/profile.php?id=100057399433683" target="_blank"><i
 								class="fab fa-facebook-f"></i></a>
-						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.instagram.com/"
+						<a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.instagram.com/ensueno_rest?igshid=OGQ5ZDc2ODk2ZA=="
 							target="_blank"><i class="fab fa-instagram"></i></a>
-						<a class="btn btn-lg btn-outline-light btn-lg-square" href="https://www.tiktok.com/es/"
+						<a class="btn btn-lg btn-outline-light btn-lg-square" href="https://vm.tiktok.com/ZM66SW6H1/"
 							target="_blank"><i class="fab fa-tiktok"></i></a>
 					</div>
 				</div>
@@ -318,77 +318,87 @@
 	<script th:src="@{/js/main.js}" src="../static/js/main.js"></script>
 	<!---->
 	<script>
-		$(document).ready(async function () {
-			try {
-				const testimoniosResponse = await fetch('https://carmensandoval.pythonanywhere.com/testimonios/');
-				const testimonios = await testimoniosResponse.json();
-				if (!testimonios || testimonios.length === 0) {
-					console.warn('No hay testimonios disponibles.');
-					return;
-				}
-				const userIds = [...new Set(testimonios.map(testimonio => testimonio.usuario))];
-				const usuarios = await Promise.all(userIds.map(async userId => {
-					const usuarioResponse = await fetch(`https://carmensandoval.pythonanywhere.com/usuarios/${userId}`);
-					return await usuarioResponse.json();
-				}));
-				if (!usuarios || usuarios.length === 0) {
-					console.warn('No hay usuarios disponibles.');
-					return;
-				}
-				const testimoniosPorUsuario = {};
-				testimonios.forEach(testimonio => {
-					const usuario = usuarios.find(user => user.id_usuario === testimonio.usuario);
-					if (usuario) {
-						if (!testimoniosPorUsuario[usuario.id_usuario]) {
-							testimoniosPorUsuario[usuario.id_usuario] = {
-								usuario: usuario,
-								testimonios: []
-							};
-						}
-						testimoniosPorUsuario[usuario.id_usuario].testimonios.push(testimonio);
-					}
-				});
-				if (!testimoniosPorUsuario || Object.keys(testimoniosPorUsuario).length === 0) {
-					console.warn('No hay testimonios agrupados por usuario.');
-					return;
-				}
-				Object.values(testimoniosPorUsuario).forEach(usuarioTestimonios => {
-					const {usuario, testimonios} = usuarioTestimonios;
-					testimonios.forEach(testimonio => {
-						$('#testimonialCarousel').append(
-							`<div class="testimonial-item">
-								 <h4>${usuario.nombre} ${usuario.apellido}</h4>
-								 <p>${testimonio.testimonio}</p>
-                             </div>`
-						);
-					});
-				});
-				$('#testimonialCarousel').owlCarousel({
-					items: 3,
-					loop: true,
-					margin: 20,
-					autoplay: true,
-					autoplayTimeout: 2000,
-					autoplayHoverPause: true,
-					dots: true,
-					responsiveClass: true,
-					responsive: {
-						0: {
-							items: 1
-						},
-						768: {
-							items: 2
-						},
-						1000: {
-							items: 3
-						}
-					}
-				});
-			} catch (error) {
-				console.error('Error al cargar testimonios:', error);
-			}
-		});
-	</script>
+        $(document).ready(async function () {
+        try {
+            const testimoniosResponse = await fetch('https://carmensandoval.pythonanywhere.com/testimonios/estado/true/');
+            const testimonios = await testimoniosResponse.json();
+
+            if (!testimonios || testimonios.length === 0) {
+                console.warn('No hay testimonios disponibles con el estado "true".');
+                return;
+            }
+
+            console.log('Testimonios con estado "true":', testimonios);
+
+            const userIds = [...new Set(testimonios.map(testimonio => testimonio.usuario))];
+            const usuarios = await Promise.all(userIds.map(async userId => {
+                const usuarioResponse = await fetch(`https://carmensandoval.pythonanywhere.com/usuarios/${userId}`);
+                return await usuarioResponse.json();
+            }));
+
+            if (!usuarios || usuarios.length === 0) {
+                console.warn('No hay usuarios disponibles.');
+                return;
+            }
+
+            const testimoniosPorUsuario = {};
+            testimonios.forEach(testimonio => {
+                const usuario = usuarios.find(user => user.id_usuario === testimonio.usuario);
+                if (usuario) {
+                    if (!testimoniosPorUsuario[usuario.id_usuario]) {
+                        testimoniosPorUsuario[usuario.id_usuario] = {
+                            usuario: usuario,
+                            testimonios: []
+                        };
+                    }
+                    testimoniosPorUsuario[usuario.id_usuario].testimonios.push(testimonio);
+                }
+            });
+
+            if (!testimoniosPorUsuario || Object.keys(testimoniosPorUsuario).length === 0) {
+                console.warn('No hay testimonios agrupados por usuario.');
+                return;
+            }
+
+            Object.values(testimoniosPorUsuario).forEach(usuarioTestimonios => {
+                const { usuario, testimonios } = usuarioTestimonios;
+                testimonios.forEach(testimonio => {
+                    $('#testimonialCarousel').append(
+                        `<div class="testimonial-item">
+                            <h4>${usuario.nombre} ${usuario.apellido}</h4>
+                            <p>${testimonio.testimonio}</p>
+                        </div>`
+                    );
+                });
+            });
+
+            $('#testimonialCarousel').owlCarousel({
+                items: 3,
+                loop: true,
+                margin: 20,
+                autoplay: true,
+                autoplayTimeout: 2000,
+                autoplayHoverPause: true,
+                dots: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error al cargar testimonios:', error);
+        }
+    });
+
+    </script>
 </body>
 
 </html>
