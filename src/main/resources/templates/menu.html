@@ -94,7 +94,7 @@
 			</div>
 			<script th:inline="javascript">
 				document.addEventListener('DOMContentLoaded', function () {
-					fetch('https://carmensandoval.pythonanywhere.com/menudiario/')
+					fetch('https://carmensandovalcajusol.pythonanywhere.com/menudiario/')
 						.then(response => response.json())
 						.then(menuItems => {
 							renderMenuItems(menuItems);

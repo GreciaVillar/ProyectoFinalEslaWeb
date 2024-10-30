@@ -183,7 +183,7 @@
 	</div>
 	<script>
 		$(document).ready(function () {
-			$.get("https://carmensandoval.pythonanywhere.com/categorias", function (categorias) {
+			$.get("https://carmensandovalcajusol.pythonanywhere.com/categorias", function (categorias) {
 				categorias.forEach(function (categoria) {
 					var nombreCategoria = categoria.nombre.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
 					var categoriaHtml = `
@@ -320,7 +320,7 @@
 	<script>
         $(document).ready(async function () {
         try {
-            const testimoniosResponse = await fetch('https://carmensandoval.pythonanywhere.com/testimonios/estado/true/');
+            const testimoniosResponse = await fetch('https://carmensandovalcajusol.pythonanywhere.com/testimonios/estado/true/');
             const testimonios = await testimoniosResponse.json();
 
             if (!testimonios || testimonios.length === 0) {
@@ -332,7 +332,7 @@
 
             const userIds = [...new Set(testimonios.map(testimonio => testimonio.usuario))];
             const usuarios = await Promise.all(userIds.map(async userId => {
-                const usuarioResponse = await fetch(`https://carmensandoval.pythonanywhere.com/usuarios/${userId}`);
+                const usuarioResponse = await fetch(`https://carmensandovalcajusol.pythonanywhere.com/usuarios/${userId}`);
                 return await usuarioResponse.json();
             }));
 

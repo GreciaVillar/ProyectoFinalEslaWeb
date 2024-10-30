@@ -111,7 +111,7 @@
 			}
 			$.ajax({
 				type: 'POST',
-				url: 'https://carmensandoval.pythonanywhere.com/reservas/',
+				url: 'https://carmensandovalcajusol.pythonanywhere.com/reservas/',
 				data: {
 					num_personas: cantidad,
 					fecha_evento: fechaHoraSeleccionada.toISOString(),
@@ -167,7 +167,7 @@
 		}
 
 		document.addEventListener('DOMContentLoaded', function () {
-			fetch('https://carmensandoval.pythonanywhere.com/ambientes/')
+			fetch('https://carmensandovalcajusol.pythonanywhere.com/ambientes/')
 				.then(response => response.json())
 				.then(data => {
 					var ambienteSelect = document.getElementById('ambienteSelect');
@@ -183,7 +183,7 @@
 				.catch(error => {
 					console.error('Error al cargar opciones de ambiente:', error);
 				});
-			fetch('https://carmensandoval.pythonanywhere.com/eventos/')
+			fetch('https://carmensandovalcajusol.pythonanywhere.com/eventos/')
 				.then(response => response.json())
 				.then(data => {
 					var eventoSelect = document.getElementById('eventoSelect');

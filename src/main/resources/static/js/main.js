@@ -80,7 +80,7 @@ function obtenerReservasUsuario(usuarioId) {
 
 	$.ajax({
 		type: 'GET',
-		url: 'https://carmensandoval.pythonanywhere.com/reservas/nom_cliente/' + usuarioId + '/', 
+		url: 'https://carmensandovalcajusol.pythonanywhere.com/reservas/nom_cliente/' + usuarioId + '/', 
 		headers: {
 			'Authorization': 'Bearer ' + localStorage.getItem('token')
 		},
@@ -99,7 +99,7 @@ function obtenerNombreUsuario(usuarioId, callback) {
 	if (usuarioId) {
 		$.ajax({
 			type: 'GET',
-			url: 'https://carmensandoval.pythonanywhere.com/usuarios/' + usuarioId + '/',
+			url: 'https://carmensandovalcajusol.pythonanywhere.com/usuarios/' + usuarioId + '/',
 			headers: {
 				'Authorization': 'Bearer ' + localStorage.getItem('token')
 			},
@@ -121,7 +121,7 @@ function obtenerNombreAmbiente(ambienteId, callback) {
 	if (ambienteId) {
 		$.ajax({
 			type: 'GET',
-			url: 'https://carmensandoval.pythonanywhere.com/ambientes/' + ambienteId + '/',
+			url: 'https://carmensandovalcajusol.pythonanywhere.com/ambientes/' + ambienteId + '/',
 			headers: {
 				'Authorization': 'Bearer ' + localStorage.getItem('token')
 			},
@@ -141,7 +141,7 @@ function obtenerNombreAmbiente(ambienteId, callback) {
 function obtenerNombreEvento(eventoId, callback) {
 	$.ajax({
 		type: 'GET',
-		url: 'https://carmensandoval.pythonanywhere.com/eventos/' + eventoId + '/',
+		url: 'https://carmensandovalcajusol.pythonanywhere.com/eventos/' + eventoId + '/',
 		headers: {
 			'Authorization': 'Bearer ' + localStorage.getItem('token')
 		},

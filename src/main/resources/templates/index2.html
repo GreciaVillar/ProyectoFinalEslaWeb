@@ -137,7 +137,7 @@
 	</div>
 	<script>
 		$(document).ready(function () {
-			$.get("https://carmensandoval.pythonanywhere.com/categorias", function (categorias) {
+			$.get("https://carmensandovalcajusol.pythonanywhere.com/categorias", function (categorias) {
 				categorias.forEach(function (categoria) {
 					var nombreCategoria = categoria.nombre.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
 					var categoriaHtml = `

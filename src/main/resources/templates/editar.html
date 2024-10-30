@@ -39,7 +39,7 @@
 
 			var urlParams = new URLSearchParams(window.location.search);
 			var idReserva = urlParams.get('idReserva');
-			fetch('https://carmensandoval.pythonanywhere.com/ambientes/')
+			fetch('https://carmensandovalcajusol.pythonanywhere.com/ambientes/')
 				.then(response => response.json())
 				.then(data => {
 					var ambienteSelect = $('#ambienteSelect');
@@ -57,7 +57,7 @@
 					console.error('Error al cargar opciones de ambiente:', error);
 				});
 
-			fetch('https://carmensandoval.pythonanywhere.com/eventos/')
+			fetch('https://carmensandovalcajusol.pythonanywhere.com/eventos/')
 				.then(response => response.json())
 				.then(data => {
 					var eventoSelect = $('#eventoSelect');
@@ -72,7 +72,7 @@
 				.catch(error => {
 					console.error('Error al cargar opciones de evento:', error);
 				});
-			fetch('https://carmensandoval.pythonanywhere.com/reservas/' + idReserva)
+			fetch('https://carmensandovalcajusol.pythonanywhere.com/reservas/' + idReserva)
 				.then(response => response.json())
 				.then(reservaEditar => {
 					$('#ambienteSelect').val(reservaEditar.ambiente);
@@ -105,7 +105,7 @@
 				evento: evento
 			});
 
-			fetch('https://carmensandoval.pythonanywhere.com/reservas/' + idReserva + '/', {
+			fetch('https://carmensandovalcajusol.pythonanywhere.com/reservas/' + idReserva + '/', {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
