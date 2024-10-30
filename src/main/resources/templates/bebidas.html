@@ -97,7 +97,7 @@
 				<script>
 					document.addEventListener('DOMContentLoaded', function () {
 						function obtenerDatosDeLaAPI() {
-							fetch('https://carmensandoval.pythonanywhere.com/menus/')
+							fetch('https://carmensandovalcajusol.pythonanywhere.com/menus/')
 								.then(response => response.json())
 								.then(data => {
 									const datosFiltrados = data.filter(item => item.categoria === 1);
